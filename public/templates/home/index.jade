@@ -1,3 +1,6 @@
 include ../includes/layout
-  block content
-    p #{ name }
+    block content
+        p #{name}
+            a(href="/auth/github") Login with Github
+        if token
+            p token = #{token}

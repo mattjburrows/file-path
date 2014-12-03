@@ -14,6 +14,10 @@
     },
 
     "middleware": {
+        
+        "appsec": {
+            "enabled": false
+        },
 
         "static": {
             "module": {

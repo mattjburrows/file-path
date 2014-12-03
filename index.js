@@ -1,8 +1,15 @@
 'use strict';
 
-var http    = require('http'),
-    express = require('express'),
-    kraken  = require('kraken-js');
+var http = require('http'),
+    path = require('path');
+
+var express      = require('express'),
+    kraken       = require('kraken-js'),
+    morgan       = require('morgan'),
+    bodyParser   = require('body-parser'),
+    cookieParser = require('cookie-parser'),
+    session      = require('express-session'),
+    flash        = require('connect-flash');
 
 var options, app, server;
 
@@ -21,7 +28,16 @@ options = {
 };
 
 app = module.exports = express();
+
 app.use(kraken(options));
+
+app.use(morgan('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(session({ secret: '1234' }));
+
+app.use(flash());
 
 app.on('start', function () {
     console.log('Application ready to serve requests.');
