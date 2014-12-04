@@ -5,7 +5,7 @@ var kraken = require('kraken-js'),
     express = require('express'),
     request = require('supertest');
 
-describe('/', function () {
+describe('/sessions/login', function () {
     var app, mock;
 
     beforeEach(function (done) {
@@ -23,12 +23,12 @@ describe('/', function () {
         mock.close(done);
     });
 
-    it('should say "hello"', function (done) {
+    it('should redirect', function (done) {
         request(mock)
-            .get('/')
-            .expect(200)
-            .expect('Content-Type', /html/)
-            .expect(/Hello, /)
+            .get('/sessions/login')
+            .expect(301)
+            .expect('Content-Type', 'text/plain')
+            .expect(/Redirecting to /)
             .end(function (err, res) {
                 done(err);
             });

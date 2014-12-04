@@ -8,8 +8,8 @@ module.exports = function mochacli(grunt) {
 	// Options
 	return {
         src: [
-            'test/lib/**/*.js'
-            // 'test/**/*.js'
+            'test/controllers/sessions/login/*.js',
+            'test/lib/sessions-manager/*.js'
         ],
         options: {
             timeout: 6000,
