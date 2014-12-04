@@ -1,7 +1,7 @@
 'use strict';
 
 var path     = require('path'),
-    octonode = require(path.resolve('.', 'config/octonode'));
+    octonode = require(path.resolve('.', 'lib/github'));
 
 module.exports = function (router) {
     router.get('/', function (req, res) {

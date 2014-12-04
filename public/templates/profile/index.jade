@@ -1,0 +1,11 @@
+include ../includes/layout
+    block content
+        if user
+            p #{user.login}
+            img(src="#{user.avatar_url}" width="64" height="64")
+
+        if repos
+            ul
+                each repo in repos
+                    li 
+                        a(href="https://github.com/mattjburrows/bamboo") #{repo.id} + #{repo.name}
