@@ -7,7 +7,7 @@ var path     = require('path'),
 
 var methods = {
         getUser: function (client) {
-            var defer  = q.defer();
+            var defer = q.defer();
 
             client.info(function (err, user) {
                 if (err) {
@@ -20,7 +20,7 @@ var methods = {
             return defer.promise;
         },
         getUserRepos: function (client) {
-            var defer  = q.defer();
+            var defer = q.defer();
 
             client.repos(function (err, repos) {
                 if (err) {
@@ -43,8 +43,8 @@ var methods = {
                     .all([methods.getUser(client), methods.getUserRepos(client)])
                     .done(function (data) {
                         res.render('profile/index', {
-                            user  : data[0],
-                            repos : data[1]
+                            user: data[0],
+                            repos: data[1]
                         });
                     });
             };

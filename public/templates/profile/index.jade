@@ -5,7 +5,16 @@ include ../includes/layout
             img(src="#{user.avatar_url}" width="64" height="64")
 
         if repos
-            ul
-                each repo in repos
-                    li 
-                        a(href="https://github.com/mattjburrows/bamboo") #{repo.id} + #{repo.name}
+            form#base-repository-form
+                label(for="base-repository") Select the repository you want to check against
+                select(name="base-repository" id="base-repository")
+                    each repo in repos
+                        option(value="#{repo.id}") #{repo.name}
+                input(type="submit" value="Select repository")
+
+            form#pr-repository-form
+                label(for="pr-repository") Select the repository you want to check from
+                select(name="pr-repository" id="pr-repository")
+                    each repo in repos
+                        option(value="#{repo.id}") #{repo.name}
+                input(type="submit" value="Select repository")

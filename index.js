@@ -9,7 +9,8 @@ var express      = require('express'),
     bodyParser   = require('body-parser'),
     cookieParser = require('cookie-parser'),
     session      = require('express-session'),
-    flash        = require('connect-flash');
+    flash        = require('connect-flash'),
+    config       = require(path.resolve('.', 'app.json'));
 
 var options, app, server;
 
@@ -35,7 +36,7 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(session({ secret: '1234' }));
+app.use(session({ secret: config['session']['secret'] }));
 
 app.use(flash());
 
