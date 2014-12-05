@@ -14,4 +14,5 @@ app.json
 
 Packages 
 ###################
-/node_modules
+node_modules/
+public/components/
