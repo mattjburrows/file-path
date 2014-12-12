@@ -12,11 +12,16 @@ include ../includes/layout
                 a(href="#{baseRepoInfo.html_url}" target="_blank") #{baseRepoInfo.full_name}
             img(src="#{baseRepoInfo.owner.avatar_url}" width="64" height="64")
 
-        if userRepos
-            h1 Select repository
-            form(action="/select-commit" method="post")#pr-repository-form
-                label(for="pr-repository") Select the repository you want to check from
-                select(name="pr-repository" id="pr-repository")
-                    each repo in userRepos
-                        option(value="#{repo.full_name}") #{repo.name}
-                input(type="submit" value="Select repository")
+        if baseRepoPRs
+            h1 Select Pull Request
+            form(action="/list-files" method="post")#pr-form
+                ul
+                    each pr in baseRepoPRs
+                        li
+                            label
+                                input(type="radio" name="pr" id="pr" value="#{pr.number}")
+                                span #{pr.title} | #{pr.number} | Author #{user.login}
+                                div
+                                    a(href="#{pr.html_url}") View PR
+                                div(style="display: none") #{pr.body}
+                input(type="submit" value="Select Pull Request")

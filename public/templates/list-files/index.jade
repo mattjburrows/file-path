@@ -1,0 +1,13 @@
+include ../includes/layout
+    block content
+        main(role="main" ui-view)
+
+        if files
+            h1 Changed files
+            ul
+            each file in files
+                li
+                    h2 #{file.filename}
+                    p Additions #{file.additions} | Deletions #{file.deletions} | Changes #{file.changes}
+                    p
+                        a(href="#{file.blob_url" target="_blank") View file

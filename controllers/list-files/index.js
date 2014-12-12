@@ -7,14 +7,14 @@ var path     = require('path'),
     config   = require(path.resolve('.', 'app.json'));
 
 var methods = {
-        getSelectedRepository: function (repo) {
+        getSelectedPR: function (pr) {
             var defer = q.defer();
 
-            repo.commits(function (err, commits) {
+            pr.files(function (err, files) {
                 if (err) {
                     defer.reject(err);
                 } else {
-                    defer.resolve(commits);
+                    defer.resolve(files);
                 }
             });
 
@@ -26,19 +26,19 @@ var methods = {
                 .then(success, error);
 
             function success (token) {
-                var repoName = req.body['pr-repository'],
-                    repo;
-                if (repoName) {
-                    repo = octonode.github.client(token).repo(config.github.base_repository);
+                var prNumber = req.body.pr,
+                    pr;
+                if (prNumber) {
+                    pr = octonode.github.client(token).pr(config.github.base_repository, prNumber);
 
-                    methods.getSelectedRepository(repo).done(function (commits) {
-                        console.log('COMMITS: ', commits);
-                        res.render('select-commit/index', {
-                            commits: commits
+                    methods.getSelectedPR(pr).done(function (files) {
+                        console.log("FILES: ", files);
+                        res.render('list-files/index', {
+                            files: files
                         });
                     });
                 } else {
-                    error('No repository selected');
+                    error('No pull request selected');
                 }
             };
 

@@ -59,6 +59,19 @@ var methods = {
 
             return defer.promise;
         },
+        getBaseRepositoryPRs: function (repo) {
+            var defer = q.defer();
+
+            repo.prs(function (err, prs) {
+                if(err) {
+                    defer.reject(err);
+                } else {
+                    defer.resolve(prs);
+                }
+            });
+
+            return defer.promise;
+        },
         handleRequest: function (req, res) {
             sessions
                 .get(req, 'github-token')
@@ -72,14 +85,14 @@ var methods = {
                 q
                     .all([
                         methods.getUser(user),
-                        methods.getUserRepos(user),
+                        methods.getBaseRepositoryPRs(repo),
                         methods.getBaseRepositoryInfo(repo),
                         methods.getBaseRepositoryBranch(repo)
                     ])
                     .done(function (data) {
                         res.render('select-repository/index', {
                             user: data[0],
-                            userRepos: data[1],
+                            baseRepoPRs: data[1],
                             baseRepoInfo: data[2],
                             baseRepoBranch: data[3]
                         });
