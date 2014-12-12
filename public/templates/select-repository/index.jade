@@ -1,0 +1,22 @@
+include ../includes/layout
+    block content
+        main(role="main" ui-view)
+        if user
+            h1 User details
+            p #{user.login}
+            img(src="#{user.avatar_url}" width="64" height="64")
+
+        if baseRepoInfo
+            h1 Base repository
+            p 
+                a(href="#{baseRepoInfo.html_url}" target="_blank") #{baseRepoInfo.full_name}
+            img(src="#{baseRepoInfo.owner.avatar_url}" width="64" height="64")
+
+        if userRepos
+            h1 Select repository
+            form(action="/select-commit" method="post")#pr-repository-form
+                label(for="pr-repository") Select the repository you want to check from
+                select(name="pr-repository" id="pr-repository")
+                    each repo in userRepos
+                        option(value="#{repo.full_name}") #{repo.name}
+                input(type="submit" value="Select repository")

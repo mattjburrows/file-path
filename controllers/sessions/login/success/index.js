@@ -17,7 +17,7 @@ module.exports = function (router) {
         }
 
         function success (token) {
-            res.redirect('/profile');
+            res.redirect('/select-repository');
         };
 
         function error (err) {

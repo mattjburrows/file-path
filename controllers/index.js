@@ -10,7 +10,7 @@ var methods = {
                 .then(success, error);
 
             function success (token) {
-                res.redirect('/profile');
+                res.redirect('/select-repository');
             };
 
             function error (err) {
