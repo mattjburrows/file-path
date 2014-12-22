@@ -90,6 +90,7 @@ var methods = {
                         methods.getBaseRepositoryBranch(repo)
                     ])
                     .done(function (data) {
+                        console.log(data[2]);
                         res.render('select-repository/index', {
                             user: data[0],
                             baseRepoPRs: data[1],
